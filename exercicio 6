@@ -1,0 +1,52 @@
+clear;
+clc;
+
+%% Dados do problema
+l2 = 10;
+l1 = 8;
+gamma = 3*pi/5;
+
+%% Função da equação não linear
+f = @(alpha) l2*cos(pi - gamma - alpha).*sin(pi - gamma - alpha).^2 ...
+           - l1*cos(alpha).*sin(alpha).^2;
+
+%% Derivada da função
+df = @(alpha) l2*(sin(pi - gamma - alpha).*sin(pi - gamma - alpha).^2 ...
+           - 2*cos(pi - gamma - alpha).^2.*sin(pi - gamma - alpha)) ...
+           + l1*(sin(alpha).*sin(alpha).^2 ...
+           - 2*cos(alpha).^2.*sin(alpha));
+
+%% Método de Newton-Raphson
+
+% Chute inicial
+alpha = 0.5;
+
+% Tolerância
+tol = 1e-6;
+
+% Número máximo de iterações
+max_iter = 100;
+
+for i = 1:max_iter
+    
+    % Fórmula de Newton-Raphson
+    alpha_novo = alpha - f(alpha)/df(alpha);
+    
+    % Verifica o critério de parada
+    if abs(alpha_novo - alpha) < tol
+        alpha = alpha_novo;
+        break;
+    end
+    
+    alpha = alpha_novo;
+end
+
+%% Cálculo do comprimento máximo da barra
+L = l2*sin(pi - gamma - alpha) + l1*sin(alpha);
+
+%% Resultados
+fprintf('Método de Newton-Raphson\n');
+fprintf('Numero de iteracoes = %d\n', i);
+fprintf('alpha = %.10f rad\n', alpha);
+fprintf('alpha = %.6f graus\n', rad2deg(alpha));
+fprintf('Comprimento maximo L = %.10f\n', L);
