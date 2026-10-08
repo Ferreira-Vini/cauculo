@@ -86,7 +86,6 @@ V_newton = V_novo;
 
 %% RESULTADOS
 
-fprintf('\n--- RESULTADOS ---\n');
 
 fprintf('\nBissecao:\n');
 fprintf('V = %.15e m^3\n', V_bissecao);
