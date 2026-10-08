@@ -89,7 +89,6 @@ x_newton = x_novo;
 
 %% RESULTADOS
 
-fprintf('\n--- RESULTADOS ---\n');
 
 fprintf('\nBissecao:\n');
 fprintf('x = %.15f\n', x_bissecao);
